@@ -1,0 +1,24 @@
+<%= form_with(model: testimonial) do |form| %>
+  <% if testimonial.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(testimonial.errors.count, "error") %> prohibited this testimonial from being saved:</h2>
+
+      <ul>
+        <% testimonial.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= form.hidden_field :name, value: User.find(current_user.id).username || 'Happy customer' %>
+
+  <div class="form-group my-2">
+    <%= form.label :comment %>
+    <%= form.rich_text_area :comment %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-lg btn-primary"%>
+  </div>
+<% end %>
